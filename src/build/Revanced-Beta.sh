@@ -2,9 +2,9 @@
 # Revanced build
 source ./src/build/utils.sh
 # Download requirements
-revanced_dl(){
+revanced_dl() {
 	dl_gh "revanced-patches" "revanced" "prerelease"
- 	dl_gh "revanced-cli" "revanced" "latest"
+	dl_gh "revanced-cli" "revanced" "latest"
 }
 1() {
 	revanced_dl
@@ -14,19 +14,19 @@ revanced_dl(){
 	split_editor "youtube-beta" "youtube-beta"
 	patch "youtube-beta" "revanced"
 	# Patch Youtube Arm64-v8a
-	get_patches_key "youtube-revanced" 
+	get_patches_key "youtube-revanced"
 	split_editor "youtube-beta" "youtube-beta-arm64-v8a" "exclude" "split_config.armeabi_v7a split_config.x86 split_config.x86_64"
 	patch "youtube-beta-arm64-v8a" "revanced"
 	# Patch Youtube Armeabi-v7a
-	get_patches_key "youtube-revanced" 
+	get_patches_key "youtube-revanced"
 	split_editor "youtube-beta" "youtube-beta-armeabi-v7a" "exclude" "split_config.arm64_v8a split_config.x86 split_config.x86_64"
 	patch "youtube-beta-armeabi-v7a" "revanced"
 	# Patch Youtube x86
-	get_patches_key "youtube-revanced" 
+	get_patches_key "youtube-revanced"
 	split_editor "youtube-beta" "youtube-beta-x86" "exclude" "split_config.arm64_v8a split_config.armeabi_v7a split_config.x86_64"
 	patch "youtube-beta-x86" "revanced"
 	# Patch Youtube x86_64
-	get_patches_key "youtube-revanced" 
+	get_patches_key "youtube-revanced"
 	split_editor "youtube-beta" "youtube-beta-x86_64" "exclude" "split_config.arm64_v8a split_config.armeabi_v7a split_config.x86"
 	patch "youtube-beta-x86_64" "revanced"
 }
@@ -54,17 +54,17 @@ revanced_dl(){
 	patch "gg-photos-arm64-v8a-beta" "revanced"
 	# Armeabi-v7a
 	get_patches_key "gg-photos"
- 	version="7.32.0.765953717"
+	version="7.32.0.765953717"
 	get_apk "com.google.android.apps.photos" "gg-photos-armeabi-v7a-beta" "photos" "google-inc/photos/google-photos" "armeabi-v7a" "nodpi"
 	patch "gg-photos-armeabi-v7a-beta" "revanced"
 	# x86
 	get_patches_key "gg-photos"
- 	version="7.32.0.765953717"
+	version="7.32.0.765953717"
 	get_apk "com.google.android.apps.photos" "gg-photos-x86-beta" "photos" "google-inc/photos/google-photos" "x86" "nodpi"
 	patch "gg-photos-x86-beta" "revanced"
 	# x86_64
 	get_patches_key "gg-photos"
- 	version="7.32.0.765953717"
+	version="7.32.0.765953717"
 	get_apk "com.google.android.apps.photos" "gg-photos-x86_64-beta" "photos" "google-inc/photos/google-photos" "x86_64" "nodpi"
 	patch "gg-photos-x86_64-beta" "revanced"
 }
@@ -123,7 +123,7 @@ revanced_dl(){
 	revanced_dl
 	# Patch Lightroom:
 	get_patches_key "lightroom"
- 	url="https://adobe-lightroom-mobile.en.uptodown.com/android/download/1033600808" #Use uptodown because apkmirror always ask pass Cloudflare on this app
+	url="https://adobe-lightroom-mobile.en.uptodown.com/android/download/1033600808" #Use uptodown because apkmirror always ask pass Cloudflare on this app
 	url="https://dw.uptodown.com/dwn/$(req "$url" - | $pup -p --charset utf-8 'button#detail-download-button attr{data-url}')"
 	req "$url" "lightroom-beta.apk"
 	patch "lightroom-beta" "revanced"
@@ -132,18 +132,18 @@ revanced_dl(){
 	get_apk "com.rarlab.rar" "rar-beta" "rar" "rarlab-published-by-win-rar-gmbh/rar/rar" "Bundle"
 	patch "rar-beta" "revanced"
 }
-8() {
-	revanced_dl
-	get_apk "com.google.android.youtube" "youtube-lite-beta" "youtube" "google-inc/youtube/youtube" "Bundle_extract"
-	# Patch YouTube Lite Arm64-v8a:
-	get_patches_key "youtube-revanced"
-	split_editor "youtube-lite-beta" "youtube-lite-beta-arm64-v8a" "include" "split_config.arm64_v8a split_config.en split_config.xxxhdpi"
-	patch "youtube-lite-beta-arm64-v8a" "revanced"
-	# Patch YouTube Lite Armeabi-v7a:
-	get_patches_key "youtube-revanced"
-	split_editor "youtube-lite-beta" "youtube-lite-beta-armeabi-v7a" "include" "split_config.armeabi_v7a split_config.en split_config.xxxhdpi"
-	patch "youtube-lite-beta-armeabi-v7a" "revanced"
-}
+# 8() {
+# 	revanced_dl
+# 	get_apk "com.google.android.youtube" "youtube-lite-beta" "youtube" "google-inc/youtube/youtube" "Bundle_extract"
+# 	# Patch YouTube Lite Arm64-v8a:
+# 	get_patches_key "youtube-revanced"
+# 	split_editor "youtube-lite-beta" "youtube-lite-beta-arm64-v8a" "include" "split_config.arm64_v8a split_config.en split_config.xxxhdpi"
+# 	patch "youtube-lite-beta-arm64-v8a" "revanced"
+# 	# Patch YouTube Lite Armeabi-v7a:
+# 	get_patches_key "youtube-revanced"
+# 	split_editor "youtube-lite-beta" "youtube-lite-beta-armeabi-v7a" "include" "split_config.armeabi_v7a split_config.en split_config.xxxhdpi"
+# 	patch "youtube-lite-beta-armeabi-v7a" "revanced"
+# }
 9() {
 	revanced_dl
 	# Patch YouTube Music:
@@ -199,40 +199,40 @@ revanced_dl(){
 	patch "spotjfy-beta-arm64-v8a" "revanced"
 }
 case "$1" in
-    1)
-        1
-        ;;
-    2)
-        2
-        ;;
-    3)
-        3
-        ;;
-    4)
-        4
-        ;;
-    5)
-        5
-        ;;
-    6)
-        6
-        ;;
-    7)
-        7
-        ;;
-    8)
-        8
-        ;;
-    9)
-        9
-        ;;
-    10)
-        10
-        ;;
-    11)
-        11
-        ;;
-    12)
-        12
-        ;;
+1)
+	1
+	;;
+2)
+	2
+	;;
+3)
+	3
+	;;
+4)
+	4
+	;;
+5)
+	5
+	;;
+6)
+	6
+	;;
+7)
+	7
+	;;
+# 8)
+# 	8
+# 	;;
+9)
+	9
+	;;
+10)
+	10
+	;;
+11)
+	11
+	;;
+12)
+	12
+	;;
 esac

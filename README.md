@@ -4,17 +4,17 @@
 They are open-source scripts for patching various apps like YouTube, YouTube Music... However, they are very difficult to use for most users. That's why I created this repository to provide an easier way.
 </h4>
 <div align="center">
-  
+
 [![Image of https://github.com/FiorenMas/Revanced-And-Revanced-Extended-Non-Root](https://github.com/FiorenMas/View-Counter/blob/main/repos/Revanced-And-Revanced-Extended-Non-Root_609906498/svg/count.svg)](https://github.com/FiorenMas/View-Counter)
 [![Image of https://github.com/FiorenMas/Revanced-And-Revanced-Extended-Non-Root/actions](https://img.shields.io/github/actions/workflow/status/fiorenmas/Revanced-And-Revanced-Extended-Non-Root/ci.yml)](https://github.com/FiorenMas/Revanced-And-Revanced-Extended-Non-Root/actions)
 [![](https://img.shields.io/badge/Telegram-2CA5E0)](https://t.me/fiorenmas)
-  
+
 </div>
 
 ---
 
 > [!NOTE]
-> ## Backup Telegram channel: 
+> ## Backup Telegram channel:
 > ### [https://t.me/fiorenmas](https://t.me/fiorenmas)
 
 ## ⚙️ How does this repository work?<img src="../main/docs/image/Readme.png" align="right" />
@@ -22,27 +22,27 @@ Simply, all you need to do is choose the app you want to use from the options be
 
 > [!NOTE]
 > If you want to use the YouTube, YouTube Music or Google Photos app, you need to download and install [MicroG](https://github.com/ReVanced/GmsCore/releases).
-> 
+>
 > If you are an advanced user and you want to use custom patches for patching apps, you should read the [Wiki](../main/docs/Frequently%20Asked%20Questions.md#q-how-do-i-use-this-repository-for-patching-my-own-app).
-> 
+>
 > This repository is not like any other repository. It does not create new releases; it only releases new files.
-> 
+>
 > All the code is open-source, clearly, and the APK files used for patching are downloaded from a trusted site, so it is totally safe for you to use.
 ---
 <h1 align="center">
 Download
 </h1>
 
-> [!IMPORTANT] 
+> [!IMPORTANT]
 > Beta versions mean using dev patches, not using beta apk files. Beta version have the same package name as Stable version, so installing them will overwrite Stable version.
 >
 > License owned by creator. If you like any modded app, please support the original author.
-> 
+>
 ---
 
 ## [MicroG ReVanced:](https://github.com/ReVanced/GmsCore)
 
-[![Release](https://img.shields.io/github/v/release/ReVanced/GmsCore?label=All-arch&style=for-the-badge)](https://github.com/ReVanced/GmsCore/releases) 
+[![Release](https://img.shields.io/github/v/release/ReVanced/GmsCore?label=All-arch&style=for-the-badge)](https://github.com/ReVanced/GmsCore/releases)
 
 ---
 
@@ -58,18 +58,6 @@ Download
 | [x86](../../releases/download/all/youtube-x86-revanced.apk)                    | [x86](../../releases/download/all/youtube-beta-x86-revanced.apk)                 |
 | [x86_64](../../releases/download/all/youtube-x86_64-revanced.apk)              | [x86_64](../../releases/download/all/youtube-beta-x86_64-revanced.apk)           |
 
-<details>
-  <summary>Lite version</summary>
-
-**A lite version is a version with unnecessary things removed. For example, it might only have an English interface and remove unused screen DPI from split APKs**
-
-| [Stable version](https://github.com/ReVanced/revanced-patches/releases/latest)      | [Beta version](https://github.com/ReVanced/revanced-patches/releases)                 |
-| ----------------------------------------------------------------------------------  | ------------------------------------------------------------------------------------- |
-| [Arm64-v8a](../../releases/download/all/youtube-lite-arm64-v8a-revanced.apk)        | [Arm64-v8a](../../releases/download/all/youtube-lite-beta-arm64-v8a-revanced.apk)     |
-| [Armeabi-v7a](../../releases/download/all/youtube-lite-armeabi-v7a-revanced.apk)    | [Armeabi-v7a](../../releases/download/all/youtube-lite-beta-armeabi-v7a-revanced.apk) |
-
-</details>
-
 ### [Revanced Extended:](https://github.com/inotia00/revanced-patches/)
 
 | [Stable version](https://github.com/inotia00/revanced-patches/releases/latest)       | [Beta version](https://github.com/inotia00/revanced-patches/releases)                     |
@@ -80,18 +68,6 @@ Download
 | [x86](../../releases/download/all/youtube-x86-revanced-extended.apk)                 | [x86](../../releases/download/all/youtube-beta-x86-revanced-extended.apk)                 |
 | [x86_64](../../releases/download/all/youtube-x86_64-revanced-extended.apk)           | [x86_64](../../releases/download/all/youtube-beta-x86_64-revanced-extended.apk)           |
 
-<details>
-  <summary>Lite version</summary>
-
-**A lite version is a version with unnecessary things removed. For example, it might only have an English interface and remove unused screen DPI from split APKs**
-
-| [Stable version](https://github.com/inotia00/revanced-patches/releases/latest)               | [Beta version](https://github.com/inotia00/revanced-patches/releases)                          |
-| -------------------------------------------------------------------------------------------  | ---------------------------------------------------------------------------------------------- |
-| [Arm64-v8a](../../releases/download/all/youtube-lite-arm64-v8a-revanced-extended.apk)        | [Arm64-v8a](../../releases/download/all/youtube-lite-beta-arm64-v8a-revanced-extended.apk)     |
-| [Armeabi-v7a](../../releases/download/all/youtube-lite-armeabi-v7a-revanced-extended.apk)    | [Armeabi-v7a](../../releases/download/all/youtube-lite-beta-armeabi-v7a-revanced-extended.apk) |
-
-</details>
-
 ### [Revanced Extended forked by anddea:](https://github.com/anddea/revanced-patches)
 
 | [Stable version](https://github.com/anddea/revanced-patches/releases/latest)     | [Beta version](https://github.com/anddea/revanced-patches/releases)            |
@@ -101,18 +77,6 @@ Download
 | [Armeabi-v7a](../../releases/download/all/youtube-stable-armeabi-v7a-anddea.apk) | [Armeabi-v7a](../../releases/download/all/youtube-beta-armeabi-v7a-anddea.apk) |
 | [x86](../../releases/download/all/youtube-stable-x86-anddea.apk)                 | [x86](../../releases/download/all/youtube-beta-x86-anddea.apk)                 |
 | [x86_64](../../releases/download/all/youtube-stable-x86_64-anddea.apk)           | [x86_64](../../releases/download/all/youtube-beta-x86_64-anddea.apk)           |
-
-<details>
-  <summary>Lite version</summary>
-
-**A lite version is a version with unnecessary things removed. For example, it might only have an English interface and remove unused screen DPI from split APKs**
-  
-| [Stable version](https://github.com/anddea/revanced-patches/releases/latest)      | [Beta version](https://github.com/anddea/revanced-patches/releases)                 |
-| --------------------------------------------------------------------------------  | ----------------------------------------------------------------------------------- |
-| [Arm64-v8a](../../releases/download/all/youtube-lite-arm64-v8a-anddea.apk)        | [Arm64-v8a](../../releases/download/all/youtube-lite-beta-arm64-v8a-anddea.apk)     |
-| [Armeabi-v7a](../../releases/download/all/youtube-lite-armeabi-v7a-anddea.apk)    | [Armeabi-v7a](../../releases/download/all/youtube-lite-beta-armeabi-v7a-anddea.apk) |
-
-</details>
 
 ### [Revanced Extended For Android 6 & 7:](https://github.com/kitadai31/revanced-patches-android6-7/tree/revanced-extended)
 
@@ -181,7 +145,7 @@ Download
 ### [Revanced:](https://github.com/revanced/revanced-patches)
 
 | Stable version                                                                        | Beta version                                                                                |
-| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | 
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
 |[Arm64-v8a & Android 11+](../../releases/download/all/facebook-arm64-v8a-revanced.apk) | [Arm64-v8a & Android 11+](../../releases/download/all/facebook-arm64-v8a-beta-revanced.apk) |
 
 ---
@@ -193,7 +157,7 @@ Download
 👉 [Offical author download link](https://github.com/crimera/twitter-apk/releases)
 
 | [Stable version](https://github.com/crimera/piko/releases/latest)          | [Beta version](https://github.com/crimera/piko/releases/)                |
-| -------------------------------------------------------------------------- | -------------------------------------------------------------------------| 
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------|
 | [All Architectures](../../releases/download/all/twitter-stable-piko.apk)   | [All Architectures](../../releases/download/all/twitter-beta-piko.apk)   |
 | [Arm64-v8a](../../releases/download/all/twitter-arm64-v8a-stable-piko.apk) | [Arm64-v8a](../../releases/download/all/twitter-arm64-v8a-beta-piko.apk) |
 
@@ -204,7 +168,7 @@ Download
 ### [Revanced:](https://github.com/revanced/revanced-patches)
 
 | Stable version                                                            | Beta version                                                                   |
-| ------------------------------------------------------------------------- | ------------------------------------------------------------------------------ | 
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
 | [Arm64-v8a](../../releases/download/all/instagram-arm64-v8a-revanced.apk) | [Arm64-v8a](../../releases/download/all/instagram-arm64-v8a-beta-revanced.apk) |
 
 ### [Revanced Experiments:](https://github.com/Aunali321/ReVancedExperiments)
@@ -218,7 +182,7 @@ Download
 ### [Revanced:](https://github.com/revanced/revanced-patches)
 
 | Stable version                                                                | Beta version                                                                       |
-| ----------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | 
+| ----------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
 | [Arm64-v8a](../../releases/download/all/gg-photos-arm64-v8a-revanced.apk)     | [Arm64-v8a](../../releases/download/all/gg-photos-arm64-v8a-beta-revanced.apk)     |
 | [armeabi-v7a](../../releases/download/all/gg-photos-armeabi-v7a-revanced.apk) | [armeabi-v7a](../../releases/download/all/gg-photos-armeabi-v7a-beta-revanced.apk) |
 | [x86](../../releases/download/all/gg-photos-x86-revanced.apk)                 | [x86](../../releases/download/all/gg-photos-x86-beta-revanced.apk)                 |
@@ -231,7 +195,7 @@ Download
 ### [Revanced:](https://github.com/revanced/revanced-patches)
 
 | Stable version                                                            | Beta version                                                                   |
-| ------------------------------------------------------------------------- | ------------------------------------------------------------------------------ | 
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
 | [Arm64-v8a](../../releases/download/all/messenger-arm64-v8a-revanced.apk) | [Arm64-v8a](../../releases/download/all/messenger-arm64-v8a-beta-revanced.apk) |
 
 ---
@@ -241,12 +205,12 @@ Download
 ### [Revanced](https://github.com/revanced/revanced-patches)
 
 | Stable version                                                            | Beta version                                                                   |
-| ------------------------------------------------------------------------- | ------------------------------------------------------------------------------ | 
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
 | [Arm64-v8a](../../releases/download/all/spotjfy-arm64-v8a-revanced.apk)   | [Arm64-v8a](../../releases/download/all/spotjfy-beta-arm64-v8a-revanced.apk)   |
 
 ### [Revanced Extended forked by anddea:](https://github.com/anddea/revanced-patches)
 | Stable version                                                            | Beta version                                                                   |
-| ------------------------------------------------------------------------- | ------------------------------------------------------------------------------ | 
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
 | [Arm64-v8a](../../releases/download/all/spotjfy-arm64-v8a-anddea.apk)     | [Arm64-v8a](../../releases/download/all/spotjfy-beta-arm64-v8a-anddea.apk)     |
 
 ---
@@ -261,7 +225,7 @@ CH play version:
 
 Web version:
 
-[All Architectures](../../releases/download/all/telegram-web-version-revanced-experiments.apk) 
+[All Architectures](../../releases/download/all/telegram-web-version-revanced-experiments.apk)
 
 ---
 
@@ -280,7 +244,7 @@ Web version:
 ### [Revanced:](https://github.com/revanced/revanced-patches)
 
 | Stable version                                                           | Beta version                                                                   |
-| ------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | 
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
 | [All Architectures](../../releases/download/all/twitch-revanced.apk)     | [All Architectures](../../releases/download/all/twitch-beta-revanced.apk)      |
 | [Arm64-v8a](../../releases/download/all/twitch-arm64-v8a-revanced.apk)   | [Arm64-v8a](../../releases/download/all/twitch-arm64-v8a-beta-revanced.apk )   |
 
@@ -291,7 +255,7 @@ Web version:
 ### [Revanced Extended:](https://github.com/inotia00/revanced-patches/)
 
 | Stable version                                                                  | Beta version                                                                         |
-| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | 
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
 | [All Architectures](../../releases/download/all/reddit-revanced-extended.apk)   | [All Architectures](../../releases/download/all/reddit-beta-revanced-extended.apk)   |
 | [Arm64-v8a](../../releases/download/all/reddit-arm64-v8a-revanced-extended.apk) | [Arm64-v8a](../../releases/download/all/reddit-arm64-v8a-beta-revanced-extended.apk) |
 
@@ -302,7 +266,7 @@ Web version:
 ### [Revanced:](https://github.com/revanced/revanced-patches)
 
 | Stable version                                                          | Beta version                                                                 |
-| ----------------------------------------------------------------------- | ---------------------------------------------------------------------------- | 
+| ----------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
 | [Arm64-v8a](../../releases/download/all/lightroom-revanced.apk)         | [Arm64-v8a](../../releases/download/all/lightroom-beta-revanced.apk)         |
 
 ---
@@ -312,7 +276,7 @@ Web version:
 ### [Revanced:](https://github.com/revanced/revanced-patches)
 
 | Stable version                                                         | Beta version                                                                |
-| ---------------------------------------------------------------------- | --------------------------------------------------------------------------- | 
+| ---------------------------------------------------------------------- | --------------------------------------------------------------------------- |
 | [All Architectures](../../releases/download/all/tumblr-revanced.apk)   | [All Architectures](../../releases/download/all/tumblr-beta-revanced.apk)   |
 | [Arm64-v8a](../../releases/download/all/tumblr-arm64-v8a-revanced.apk) | [Arm64-v8a](../../releases/download/all/tumblr-arm64-v8a-beta-revanced.apk) |
 
@@ -323,7 +287,7 @@ Web version:
 ### [Revanced:](https://github.com/revanced/revanced-patches)
 
 | Stable version                                                             | Beta version                                                                    |
-| -------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | 
+| -------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
 | [All Architectures](../../releases/download/all/soundcloud-revanced.apk)   | [All Architectures](../../releases/download/all/soundcloud-beta-revanced.apk)   |
 | [Arm64-v8a](../../releases/download/all/soundcloud-arm64-v8a-revanced.apk) | [Arm64-v8a](../../releases/download/all/soundcloud-arm64-v8a-beta-revanced.apk) |
 
@@ -384,7 +348,7 @@ Web version:
 ### [Revanced:](https://github.com/revanced/revanced-patches)
 
 | Stable version                                                      | Beta version                                                             |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------------ | 
+| ------------------------------------------------------------------- | ------------------------------------------------------------------------ |
 | [All Architectures](../../releases/download/all/pixiv-revanced.apk) | [All Architectures](../../releases/download/all/pixiv-beta-revanced.apk) |
 
 ---
