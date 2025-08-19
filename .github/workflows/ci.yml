@@ -228,18 +228,26 @@ jobs:
           path: artifacts
           merge-multiple: true
 
-      - name: Send notification to Telegram
+      - name: Send summary message
         run: |
           MESSAGE="✅ New patches released at $(date +'%Y-%m-%d %H:%M')"
           curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
             -d chat_id=${{ secrets.TELEGRAM_CHAT_ID }} \
             -d text="$MESSAGE"
 
-      - name: Upload APKs to Telegram
+      - name: Send APK links to Telegram
         run: |
+          TAG="v${{ github.run_number }}"
+          REPO="${{ github.repository }}"
+          CHAT_ID="${{ secrets.TELEGRAM_CHAT_ID }}"
+          BOT_TOKEN="${{ secrets.TELEGRAM_BOT_TOKEN }}"
+
           for file in $(find artifacts -type f -name "*.apk"); do
-            echo "Uploading $file ..."
-            curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendDocument" \
-              -F chat_id=${{ secrets.TELEGRAM_CHAT_ID }} \
-              -F document=@$file
+            filename=$(basename "$file")
+            url="https://github.com/$REPO/releases/download/$TAG/$filename"
+            echo "Sending link for $filename ..."
+            curl -s -X POST "https://api.telegram.org/bot$BOT_TOKEN/sendMessage" \
+              -d chat_id="$CHAT_ID" \
+              -d parse_mode=Markdown \
+              -d text="📦 *New APK*: [$filename]($url)"
           done
