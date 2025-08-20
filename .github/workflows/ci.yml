@@ -242,74 +242,12 @@ jobs:
           CHAT_ID="${{ secrets.TELEGRAM_CHAT_ID }}"
           BOT_TOKEN="${{ secrets.TELEGRAM_BOT_TOKEN }}"
 
-          # storage variables
-          declare -A YT_REVANCED YTM_REVANCED SPOT_REVANCED OTHER_REVANCED
-          declare -A YT_EXTENDED YTM_EXTENDED SPOT_EXTENDED OTHER_EXTENDED
-          declare -A YT_ANDDEA YTM_ANDDEA SPOT_ANDDEA OTHER_ANDDEA
-
           for file in $(find artifacts -type f -name "*.apk"); do
             filename=$(basename "$file")
             url="https://github.com/$REPO/releases/download/$TAG/$filename"
-
-            case "$filename" in
-              *revanced.apk)
-                if [[ "$filename" == *"music"* ]]; then
-                  YTM_REVANCED["$filename"]="$url"
-                elif [[ "$filename" == *"spotify"* ]]; then
-                  SPOT_REVANCED["$filename"]="$url"
-                elif [[ "$filename" == *"youtube"* ]]; then
-                  YT_REVANCED["$filename"]="$url"
-                else
-                  OTHER_REVANCED["$filename"]="$url"
-                fi
-                ;;
-              *extended.apk)
-                if [[ "$filename" == *"music"* ]]; then
-                  YTM_EXTENDED["$filename"]="$url"
-                elif [[ "$filename" == *"spotify"* ]]; then
-                  SPOT_EXTENDED["$filename"]="$url"
-                elif [[ "$filename" == *"youtube"* ]]; then
-                  YT_EXTENDED["$filename"]="$url"
-                else
-                  OTHER_EXTENDED["$filename"]="$url"
-                fi
-                ;;
-              *anddea.apk)
-                if [[ "$filename" == *"music"* ]]; then
-                  YTM_ANDDEA["$filename"]="$url"
-                elif [[ "$filename" == *"spotify"* ]]; then
-                  SPOT_ANDDEA["$filename"]="$url"
-                elif [[ "$filename" == *"youtube"* ]]; then
-                  YT_ANDDEA["$filename"]="$url"
-                else
-                  OTHER_ANDDEA["$filename"]="$url"
-                fi
-                ;;
-            esac
+            echo "Sending link for $filename ..."
+            curl -s -X POST "https://api.telegram.org/bot$BOT_TOKEN/sendMessage" \
+              -d chat_id="$CHAT_ID" \
+              -d parse_mode=Markdown \
+              -d text="📦 *New APK*: [$filename]($url)"
           done
-
-          make_section () {
-            local title="$1"
-            shift
-            local -n ref=$1
-            if [ ${#ref[@]} -gt 0 ]; then
-              echo -n "$title%0A"
-              for k in "${!ref[@]}"; do
-                echo -n "• [$k](${ref[$k]})%0A"
-              done
-              echo -n "%0A"
-            fi
-          }
-
-          MESSAGE="📦 *New APK Release*%0A%0A"
-
-          MESSAGE+="🔥 *YouTube Revanced*%0A$(make_section '▶️ YouTube' YT_REVANCED)$(make_section '🎵 Music' YTM_REVANCED)$(make_section '🎧 Spotify' SPOT_REVANCED)$(make_section '📂 Other' OTHER_REVANCED)"
-          MESSAGE+="✨ *YouTube Revanced Extended*%0A$(make_section '▶️ YouTube' YT_EXTENDED)$(make_section '🎵 Music' YTM_EXTENDED)$(make_section '🎧 Spotify' SPOT_EXTENDED)$(make_section '📂 Other' OTHER_EXTENDED)"
-          MESSAGE+="🧩 *YouTube Revanced Anddea*%0A$(make_section '▶️ YouTube' YT_ANDDEA)$(make_section '🎵 Music' YTM_ANDDEA)$(make_section '🎧 Spotify' SPOT_ANDDEA)$(make_section '📂 Other' OTHER_ANDDEA)"
-
-          echo "Sending categorized message ..."
-          curl -s -X POST "https://api.telegram.org/bot$BOT_TOKEN/sendMessage" \
-            -d chat_id="$CHAT_ID" \
-            -d parse_mode=Markdown \
-            -d disable_web_page_preview=true \
-            -d text="$MESSAGE"
