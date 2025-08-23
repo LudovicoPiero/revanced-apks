@@ -18,7 +18,7 @@ jobs:
       repository: ${{ github.repository }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.1.1
+        uses: actions/checkout@v5.0.0
 
       - name: Check github connection
         id: check-gh
@@ -298,15 +298,15 @@ jobs:
           MESSAGE=$'📦 *New APKs Released*:\n\n'
           for arch in "arm64-v8a" "armeabi-v7a" "x86_64" "x86" "universal"; do
             if [[ -n "${groups[$arch]}" ]]; then
-              MESSAGE+="*${arch}:*\n"
+              MESSAGE+="*${arch}:*"$'\n'
               i=1
               while IFS= read -r line; do
                 [[ -z "$line" ]] && continue
                 filename=$(basename "$line")
-                MESSAGE+="$i. [$filename]($line)\n"
+                MESSAGE+="$i. [$filename]($line)"$'\n'
                 ((i++))
               done <<< "$(echo -e "${groups[$arch]}" | sort)"
-              MESSAGE+="\n"
+              MESSAGE+=$'\n'
             fi
           done
 
