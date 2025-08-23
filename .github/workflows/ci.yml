@@ -9,6 +9,7 @@ on:
         description: 'Do not change value below'
         required: false
         default: '1'
+
 jobs:
   check:
     name: Check new patch
@@ -18,61 +19,76 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.1
+
       - name: Check github connection
         id: check-gh
         run: bash src/etc/connection.sh
+
       - name: Check new patch ReVanced
         id: check-rv
         if: steps.check-gh.outputs.internet_error == '0'
         run: bash src/etc/ci.sh ReVanced/revanced-patches latest youtube-revanced.apk
+
       - name: Check new patch ReVanced Beta
         id: check-rv-beta
         if: steps.check-gh.outputs.internet_error == '0'
         run: bash src/etc/ci.sh ReVanced/revanced-patches prerelease youtube-beta-revanced.apk
+
       - name: Check new patch Spotjfy
         id: check-spotjfy
         if: steps.check-gh.outputs.internet_error == '0'
         run: bash src/etc/ci.sh ReVanced/revanced-patches latest spotjfy-arm64-v8a-revanced.apk
+
       - name: Check new patch Revanced Extended forked by Anddea Stable Version
         id: check-rve-anddea-stable
         if: steps.check-gh.outputs.internet_error == '0'
         run: bash src/etc/ci.sh anddea/revanced-patches latest youtube-stable-anddea.apk
+
       - name: Check new patch Revanced Extended forked by Anddea Beta Version
         id: check-rve-anddea-beta
         if: steps.check-gh.outputs.internet_error == '0'
         run: bash src/etc/ci.sh anddea/revanced-patches prerelease youtube-beta-anddea.apk
+
       - name: Check new patch Revanced Extended
         id: check-rve
         if: steps.check-gh.outputs.internet_error == '0'
         run: bash src/etc/ci.sh inotia00/revanced-patches latest youtube-revanced-extended.apk
+
       - name: Check new patch Revanced Extended Beta
         id: check-rve-beta
         if: steps.check-gh.outputs.internet_error == '0'
         run: bash src/etc/ci.sh inotia00/revanced-patches prerelease youtube-beta-revanced-extended.apk
+
       - name: Check new patch Twitter Piko Stable
         id: check-twitter-piko-stable
         if: steps.check-gh.outputs.internet_error == '0'
         run: bash src/etc/ci.sh crimera/piko latest twitter-stable-piko.apk
+
       - name: Check new patch Twitter Piko Beta
         id: check-twitter-piko-beta
         if: steps.check-gh.outputs.internet_error == '0'
         run: bash src/etc/ci.sh crimera/piko prerelease twitter-beta-piko.apk
+
       - name: Check new patch Revanced For Android 6 & 7
         id: check-rve67
         if: steps.check-gh.outputs.internet_error == '0'
         run: bash src/etc/ci.sh kitadai31/revanced-patches-android6-7 latest youtube-revanced-extended-android-6-7.apk
+
       - name: Check new patch Revanced For Android 5
         id: check-rve5
         if: steps.check-gh.outputs.internet_error == '0'
         run: bash src/etc/ci.sh d4n3436/revanced-patches-android5 latest youtube-revanced-extended-android-5.apk
+
       - name: Check new patch BiliRoamingM
         id: check-BiliRoamingM
         if: steps.check-gh.outputs.internet_error == '0'
         run: bash src/etc/ci.sh sakarie9/BiliRoamingM latest bilibili-BiliRoamingM.apk
+
       - name: Check new patch Revanced Experiments
         id: check-Revanced-Experiments
         if: steps.check-gh.outputs.internet_error == '0'
         run: bash src/etc/ci.sh Aunali321/ReVancedExperiments latest telegram-revanced-experiments.apk
+
       - name: Re-run workflow if github connection not stable
         if: always() && steps.check-rv.outcome == 'skipped' && env.retry_count < env.max_retries
         uses: actions/github-script@v7
@@ -96,6 +112,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           retry_count: ${{ github.event.inputs.retry_count }}
           max_retries: 3
+
     outputs:
       check_rv: ${{ steps.check-rv.outputs.new_patch }}
       check_rv_beta: ${{ steps.check-rv-beta.outputs.new_patch }}
@@ -118,6 +135,7 @@ jobs:
     uses: ./.github/workflows/manual-patch.yml
     with:
       org: "Revanced"
+
   Patch-Revanced-Beta:
     name: Patch Revanced Beta
     needs: check
@@ -125,6 +143,7 @@ jobs:
     uses: ./.github/workflows/manual-patch.yml
     with:
       org: "Revanced Beta"
+
   Patch-Spotjfy:
     name: Patch Spotjfy
     needs: check
@@ -132,6 +151,7 @@ jobs:
     uses: ./.github/workflows/manual-patch.yml
     with:
       org: "Spotjfy"
+
   Patch-RVE-anddea-stable:
     name: Patch RVX Anddea Stable
     needs: check
@@ -139,6 +159,7 @@ jobs:
     uses: ./.github/workflows/manual-patch.yml
     with:
       org: "RVE-anddea-stable"
+
   Patch-RVE-anddea-beta:
     name: Patch RVX Anddea Beta
     needs: check
@@ -146,6 +167,7 @@ jobs:
     uses: ./.github/workflows/manual-patch.yml
     with:
       org: "RVE-anddea-beta"
+
   Patch-Revanced-Extended:
     name: Patch Revanced Extended
     needs: check
@@ -153,6 +175,7 @@ jobs:
     uses: ./.github/workflows/manual-patch.yml
     with:
       org: "Revanced Extended"
+
   Patch-Revanced-Extended-Beta:
     name: Patch Revanced Extended Beta
     needs: check
@@ -160,6 +183,7 @@ jobs:
     uses: ./.github/workflows/manual-patch.yml
     with:
       org: "Revanced Extended Beta"
+
   Patch-Twitter-Piko-Stable:
     name: Patch Twitter Piko Stable
     needs: check
@@ -167,6 +191,7 @@ jobs:
     uses: ./.github/workflows/manual-patch.yml
     with:
       org: "Twitter Piko Stable"
+
   Patch-Twitter-Piko-Beta:
     name: Patch Twitter Piko Beta
     needs: check
@@ -174,6 +199,7 @@ jobs:
     uses: ./.github/workflows/manual-patch.yml
     with:
       org: "Twitter Piko Beta"
+
   Patch-Revanced-Extended-For-Android-6-7:
     name: Patch RVX Android 6 & 7
     needs: check
@@ -181,6 +207,7 @@ jobs:
     uses: ./.github/workflows/manual-patch.yml
     with:
       org: "Revanced Extended Android 6,7"
+
   Patch-Revanced-Extended-For-Android-5:
     name: Patch RVX Android 5
     needs: check
@@ -188,6 +215,7 @@ jobs:
     uses: ./.github/workflows/manual-patch.yml
     with:
       org: "Revanced Extended Android 5"
+
   Patch-BiliRoamingM:
     name: Patch BiliRoamingM
     needs: check
@@ -195,6 +223,7 @@ jobs:
     uses: ./.github/workflows/manual-patch.yml
     with:
       org: "BiliRoamingM"
+
   Patch-Revanced-Experiments:
     name: Patch Revanced Experiments
     needs: check
@@ -242,12 +271,46 @@ jobs:
           CHAT_ID="${{ secrets.TELEGRAM_CHAT_ID }}"
           BOT_TOKEN="${{ secrets.TELEGRAM_BOT_TOKEN }}"
 
+          declare -A groups
+          groups["arm64-v8a"]=""
+          groups["armeabi-v7a"]=""
+          groups["x86_64"]=""
+          groups["x86"]=""
+          groups["universal"]=""
+
           for file in $(find artifacts -type f -name "*.apk"); do
             filename=$(basename "$file")
             url="https://github.com/$REPO/releases/download/$TAG/$filename"
-            echo "Sending link for $filename ..."
-            curl -s -X POST "https://api.telegram.org/bot$BOT_TOKEN/sendMessage" \
-              -d chat_id="$CHAT_ID" \
-              -d parse_mode=Markdown \
-              -d text="📦 *New APK*: [$filename]($url)"
+
+            if [[ "$filename" == *"arm64-v8a"* ]]; then
+              groups["arm64-v8a"]+="$url\n"
+            elif [[ "$filename" == *"armeabi-v7a"* ]]; then
+              groups["armeabi-v7a"]+="$url\n"
+            elif [[ "$filename" == *"x86_64"* ]]; then
+              groups["x86_64"]+="$url\n"
+            elif [[ "$filename" == *"x86"* ]]; then
+              groups["x86"]+="$url\n"
+            else
+              groups["universal"]+="$url\n"
+            fi
           done
+
+          MESSAGE="📦 *New APKs Released*:\n\n"
+          for arch in "arm64-v8a" "armeabi-v7a" "x86_64" "x86" "universal"; do
+            if [[ -n "${groups[$arch]}" ]]; then
+              MESSAGE+="*${arch}:*\n"
+              i=1
+              while IFS= read -r line; do
+                [[ -z "$line" ]] && continue
+                filename=$(basename "$line")
+                MESSAGE+="$i. [$filename]($line)\n"
+                ((i++))
+              done <<< "$(echo -e "${groups[$arch]}" | sort)"
+              MESSAGE+="\n"
+            fi
+          done
+
+          curl -s -X POST "https://api.telegram.org/bot$BOT_TOKEN/sendMessage" \
+            -d chat_id="$CHAT_ID" \
+            -d parse_mode=Markdown \
+            -d text="$MESSAGE"
