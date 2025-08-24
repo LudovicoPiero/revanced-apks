@@ -257,7 +257,17 @@ jobs:
           path: artifacts
           merge-multiple: true
 
+      - name: Check if any APK exists
+        id: check-apk
+        run: |
+          if find artifacts -type f -name "*.apk" | grep -q .; then
+            echo "found=true" >> $GITHUB_OUTPUT
+          else
+            echo "found=false" >> $GITHUB_OUTPUT
+          fi
+
       - name: Send summary message
+        if: steps.check-apk.outputs.found == 'true'
         run: |
           MESSAGE=$'✅ New patches released at '"$(date +'%Y-%m-%d %H:%M')"
           curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
@@ -265,6 +275,7 @@ jobs:
             --data-urlencode "text=$MESSAGE"
 
       - name: Send APK links to Telegram
+        if: steps.check-apk.outputs.found == 'true'
         run: |
           TAG="all"
           REPO="${{ github.repository }}"
