@@ -191,11 +191,7 @@ revanced_dl(){
 	# Patch Spotjfy Arm64-v8a
 	get_patches_key "Spotjfy-revanced"
 	j="i"
-<<<<<<< HEAD
- 	version="9.0.64.107" #https://github.com/ReVanced/revanced-patches/issues/5537#issuecomment-3134402120
-=======
 	version="9.0.64.107" #https://github.com/ReVanced/revanced-patches/issues/5537#issuecomment-3134402120
->>>>>>> fb4ce17 (feat: enable youtube lite, twitch)
 	get_apkpure "com.spot"$j"fy.music" "spotjfy-arm64-v8a" "spot"$j"fy-music-and-podcasts-for-android/com.spot"$j"fy.music"
 	patch "spotjfy-arm64-v8a" "revanced"
 }
