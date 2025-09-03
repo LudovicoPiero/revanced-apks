@@ -37,22 +37,22 @@ patch "youtube-stable-x86_64" "anddea" "inotia"
 #done
 
 # Patch YouTube Music:
-# # Arm64-v8a
-# get_patches_key "youtube-music-rve-anddea"
-# get_apk "com.google.android.apps.youtube.music" "youtube-music-stable-arm64-v8a" "youtube-music" "google-inc/youtube-music/youtube-music" "arm64-v8a"
-# patch "youtube-music-stable-arm64-v8a" "anddea" "inotia"
-# # Armeabi-v7a
-# get_patches_key "youtube-music-rve-anddea"
-# get_apk "com.google.android.apps.youtube.music" "youtube-music-stable-armeabi-v7a" "youtube-music" "google-inc/youtube-music/youtube-music" "armeabi-v7a"
-# patch "youtube-music-stable-armeabi-v7a" "anddea" "inotia"
-# # x86_64
-# get_patches_key "youtube-music-rve-anddea"
-# get_apk "com.google.android.apps.youtube.music" "youtube-music-stable-x86_64" "youtube-music" "google-inc/youtube-music/youtube-music" "x86_64"
-# patch "youtube-music-stable-x86_64" "anddea" "inotia"
-# # x86
-# get_patches_key "youtube-music-rve-anddea"
-# get_apk "com.google.android.apps.youtube.music" "youtube-music-stable-x86" "youtube-music" "google-inc/youtube-music/youtube-music" "x86"
-# patch "youtube-music-stable-x86" "anddea" "inotia"
+# Arm64-v8a
+get_patches_key "youtube-music-rve-anddea"
+get_apk "com.google.android.apps.youtube.music" "youtube-music-stable-arm64-v8a" "youtube-music" "google-inc/youtube-music/youtube-music" "arm64-v8a"
+patch "youtube-music-stable-arm64-v8a" "anddea" "inotia"
+# Armeabi-v7a
+get_patches_key "youtube-music-rve-anddea"
+get_apk "com.google.android.apps.youtube.music" "youtube-music-stable-armeabi-v7a" "youtube-music" "google-inc/youtube-music/youtube-music" "armeabi-v7a"
+patch "youtube-music-stable-armeabi-v7a" "anddea" "inotia"
+# x86_64
+get_patches_key "youtube-music-rve-anddea"
+get_apk "com.google.android.apps.youtube.music" "youtube-music-stable-x86_64" "youtube-music" "google-inc/youtube-music/youtube-music" "x86_64"
+patch "youtube-music-stable-x86_64" "anddea" "inotia"
+# x86
+get_patches_key "youtube-music-rve-anddea"
+get_apk "com.google.android.apps.youtube.music" "youtube-music-stable-x86" "youtube-music" "google-inc/youtube-music/youtube-music" "x86"
+patch "youtube-music-stable-x86" "anddea" "inotia"
 
 # Patch Spotjfy Arm64-v8a
 get_patches_key "Spotjfy-anddea"
