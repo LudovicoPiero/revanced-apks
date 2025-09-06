@@ -25,6 +25,7 @@ on:
           - 'Revanced Extended Android 6,7'
           - 'Revanced Extended Android 5'
           - 'BiliRoamingM'
+          - 'Scrazzz Patches'
           - 'Dropped Patches - indrastorms'
           - 'Revanced Experiments'
   workflow_call:
@@ -404,6 +405,46 @@ jobs:
         with:
           name: Cache_rv_experiments
           path: ./release
+      - name: Releasing APK files
+        uses: ./.github/actions/release
+
+  patch_scrazzz_patches:
+    name: Patch Scrazzz Patches Revanced
+    if: ${{ github.event.inputs.org == 'Scrazzz Patches' || inputs.org == 'Scrazzz Patches' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+      - name: Preparing to patch
+        uses: ./.github/actions/preparing
+      - name: Check github connection
+        id: check-gh-scrazzz-patches
+        run: bash src/etc/connection.sh
+      - name: Patch apk
+        id: patch-scrazzz-patches
+        if: steps.check-gh-scrazzz-patches.outputs.internet_error == '0'
+        run: bash src/build/scrazzz-revanced.sh
+      - name: Cache
+        if: steps.check-gh-scrazzz-patches.outputs.internet_error == '0'
+        uses: actions/upload-artifact@v4
+        with:
+          name: Cache_scrazzz_patches
+          path: ./release/*.apk
+
+  release_scrazzz_patches:
+    name: Release Scrazzz Patches Revanced
+    needs: patch_scrazzz_patches
+    if: needs.patch_scrazzz_patches.result == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+      - name: Cache
+        uses: actions/download-artifact@v5
+        with:
+          name: Cache_scrazzz_patches
+          path: ./release
+          if-no-artifact-found: ignore
       - name: Releasing APK files
         uses: ./.github/actions/release
 
