@@ -2,7 +2,7 @@
 # Revanced build
 source ./src/build/utils.sh
 # Download requirements
-revanced_dl(){
+revanced_dl() {
 	dl_gh "revanced-patches revanced-cli" "revanced" "latest"
 }
 1() {
@@ -39,7 +39,7 @@ revanced_dl(){
 	# Patch Facebook:
 	# Arm64-v8a
 	get_patches_key "facebook"
- 	get_apkpure "com.facebook.katana" "facebook-arm64-v8a" "facebook/com.facebook.katana"
+	get_apkpure "com.facebook.katana" "facebook-arm64-v8a" "facebook/com.facebook.katana"
 	patch "facebook-arm64-v8a" "revanced"
 }
 3() {
@@ -51,17 +51,17 @@ revanced_dl(){
 	patch "gg-photos-arm64-v8a" "revanced"
 	# Armeabi-v7a
 	get_patches_key "gg-photos"
- 	version="7.32.0.765953717"
+	version="7.32.0.765953717"
 	get_apk "com.google.android.apps.photos" "gg-photos-armeabi-v7a" "photos" "google-inc/photos/google-photos" "armeabi-v7a" "nodpi"
 	patch "gg-photos-armeabi-v7a" "revanced"
 	# x86
 	get_patches_key "gg-photos"
- 	version="7.32.0.765953717"
+	version="7.32.0.765953717"
 	get_apk "com.google.android.apps.photos" "gg-photos-x86" "photos" "google-inc/photos/google-photos" "x86" "nodpi"
 	patch "gg-photos-x86" "revanced"
 	# x86_64
 	get_patches_key "gg-photos"
- 	version="7.32.0.765953717"
+	version="7.32.0.765953717"
 	get_apk "com.google.android.apps.photos" "gg-photos-x86_64" "photos" "google-inc/photos/google-photos" "x86_64" "nodpi"
 	patch "gg-photos-x86_64" "revanced"
 }
@@ -76,7 +76,7 @@ revanced_dl(){
 	# Patch Instagram:
 	# Arm64-v8a
 	get_patches_key "instagram"
- 	get_apkpure "com.instagram.android" "instagram-arm64-v8a" "instagram-android/com.instagram.android" "Bundle"
+	get_apkpure "com.instagram.android" "instagram-arm64-v8a" "instagram-android/com.instagram.android" "Bundle"
 	patch "instagram-arm64-v8a" "revanced"
 }
 5() {
@@ -124,7 +124,7 @@ revanced_dl(){
 	patch "rar" "revanced"
 	# Patch Lightroom:
 	#get_patches_key "lightroom"
-  	#version="10.0.2"
+	#version="10.0.2"
 	#get_apk "com.adobe.lrmobile" "lightroom" "lightroom" "adobe/lightroom/lightroom"
 	#patch "lightroom" "revanced"
 }
@@ -188,47 +188,50 @@ revanced_dl(){
 12() {
 	revanced_dl
 	# Patch Spotjfy Arm64-v8a
-	get_patches_key "Spotjfy-revanced"
 	j="i"
- 	version="9.0.64.107" #https://github.com/ReVanced/revanced-patches/issues/5537#issuecomment-3134402120
+	get_patches_key "Spotjfy-revanced"
 	get_apkpure "com.spot"$j"fy.music" "spotjfy-arm64-v8a" "spot"$j"fy-music-and-podcasts-for-android/com.spot"$j"fy.music"
 	patch "spotjfy-arm64-v8a" "revanced"
+	# Patch Proton mail
+	get_patches_key "protonmail-revanced"
+	get_apk "ch.protonmail.android" "protonmail" "protonmail-encrypted-email" "proton-technologies-ag/protonmail-encrypted-email/proton-mail-encrypted-email"
+	patch "protonmail" "revanced"
 }
 case "$1" in
-    1)
-        1
-        ;;
-    2)
-        2
-        ;;
-    3)
-        3
-        ;;
-    4)
-        4
-        ;;
-    5)
-        5
-        ;;
-    6)
-        6
-        ;;
-    7)
-        7
-        ;;
-    8)
-        8
-        ;;
-    9)
-        9
-        ;;
-    10)
-        10
-        ;;
-    11)
-        11
-        ;;
-    12)
-        12
-        ;;
+1)
+	1
+	;;
+2)
+	2
+	;;
+3)
+	3
+	;;
+4)
+	4
+	;;
+5)
+	5
+	;;
+6)
+	6
+	;;
+7)
+	7
+	;;
+8)
+	8
+	;;
+9)
+	9
+	;;
+10)
+	10
+	;;
+11)
+	11
+	;;
+12)
+	12
+	;;
 esac

@@ -2,9 +2,9 @@
 # Revanced build
 source ./src/build/utils.sh
 # Download requirements
-revanced_dl(){
+revanced_dl() {
 	dl_gh "revanced-patches" "revanced" "prerelease"
- 	dl_gh "revanced-cli" "revanced" "latest"
+	dl_gh "revanced-cli" "revanced" "latest"
 }
 1() {
 	revanced_dl
@@ -35,7 +35,7 @@ revanced_dl(){
 	# Patch Messenger:
 	# Arm64-v8a
 	get_patches_key "messenger"
- 	get_apkpure "com.facebook.orca" "messenger-arm64-v8a-beta" "facebook-messenger/com.facebook.orca"
+	get_apkpure "com.facebook.orca" "messenger-arm64-v8a-beta" "facebook-messenger/com.facebook.orca"
 	patch "messenger-arm64-v8a-beta" "revanced"
 	# Patch Facebook:
 	# Arm64-v8a
@@ -52,17 +52,17 @@ revanced_dl(){
 	patch "gg-photos-arm64-v8a-beta" "revanced"
 	# Armeabi-v7a
 	get_patches_key "gg-photos"
- 	version="7.32.0.765953717"
+	version="7.32.0.765953717"
 	get_apk "com.google.android.apps.photos" "gg-photos-armeabi-v7a-beta" "photos" "google-inc/photos/google-photos" "armeabi-v7a" "nodpi"
 	patch "gg-photos-armeabi-v7a-beta" "revanced"
 	# x86
 	get_patches_key "gg-photos"
- 	version="7.32.0.765953717"
+	version="7.32.0.765953717"
 	get_apk "com.google.android.apps.photos" "gg-photos-x86-beta" "photos" "google-inc/photos/google-photos" "x86" "nodpi"
 	patch "gg-photos-x86-beta" "revanced"
 	# x86_64
 	get_patches_key "gg-photos"
- 	version="7.32.0.765953717"
+	version="7.32.0.765953717"
 	get_apk "com.google.android.apps.photos" "gg-photos-x86_64-beta" "photos" "google-inc/photos/google-photos" "x86_64" "nodpi"
 	patch "gg-photos-x86_64-beta" "revanced"
 }
@@ -89,7 +89,7 @@ revanced_dl(){
 	# Patch Twitch:
 	get_patches_key "twitch"
 	get_apk "tv.twitch.android.app" "twitch-beta" "twitch" "twitch-interactive-inc/twitch/twitch-live-streaming" "Bundle_extract"
- 	split_editor "twitch-beta" "twitch-beta"
+	split_editor "twitch-beta" "twitch-beta"
 	patch "twitch-beta" "revanced"
 	# Patch Twitch Arm64-v8a:
 	get_patches_key "twitch"
@@ -121,7 +121,7 @@ revanced_dl(){
 	revanced_dl
 	# Patch Lightroom:
 	get_patches_key "lightroom"
- 	url="https://adobe-lightroom-mobile.en.uptodown.com/android/download/1033600808" #Use uptodown because apkmirror always ask pass Cloudflare on this app
+	url="https://adobe-lightroom-mobile.en.uptodown.com/android/download/1033600808" #Use uptodown because apkmirror always ask pass Cloudflare on this app
 	url="https://dw.uptodown.com/dwn/$(req "$url" - | $pup -p --charset utf-8 'button#detail-download-button attr{data-url}')"
 	req "$url" "lightroom-beta.apk"
 	patch "lightroom-beta" "revanced"
@@ -190,47 +190,50 @@ revanced_dl(){
 12() {
 	revanced_dl
 	# Patch Spotjfy Arm64-v8a
-	get_patches_key "Spotjfy-revanced"
 	j="i"
- 	version="9.0.64.107" #https://github.com/ReVanced/revanced-patches/issues/5537#issuecomment-3134402120
+	get_patches_key "Spotjfy-revanced"
 	get_apkpure "com.spot"$j"fy.music" "spotjfy-beta-arm64-v8a" "spot"$j"fy-music-and-podcasts-for-android/com.spot"$j"fy.music"
 	patch "spotjfy-beta-arm64-v8a" "revanced"
+	# Patch Proton mail
+	get_patches_key "protonmail-revanced"
+	get_apk "ch.protonmail.android" "protonmail-beta" "protonmail-encrypted-email" "proton-technologies-ag/protonmail-encrypted-email/proton-mail-encrypted-email"
+	patch "protonmail-beta" "revanced"
 }
 case "$1" in
-    1)
-        1
-        ;;
-    2)
-        2
-        ;;
-    3)
-        3
-        ;;
-    4)
-        4
-        ;;
-    5)
-        5
-        ;;
-    6)
-        6
-        ;;
-    7)
-        7
-        ;;
-    8)
-        8
-        ;;
-    9)
-        9
-        ;;
-    10)
-        10
-        ;;
-    11)
-        11
-        ;;
-    12)
-        12
-        ;;
+1)
+	1
+	;;
+2)
+	2
+	;;
+3)
+	3
+	;;
+4)
+	4
+	;;
+5)
+	5
+	;;
+6)
+	6
+	;;
+7)
+	7
+	;;
+8)
+	8
+	;;
+9)
+	9
+	;;
+10)
+	10
+	;;
+11)
+	11
+	;;
+12)
+	12
+	;;
 esac
