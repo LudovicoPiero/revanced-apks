@@ -68,7 +68,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.2.2
       - name: Cache
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           pattern: Cache_rv_*
           path: ./release
@@ -110,7 +110,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.2.2
       - name: Cache
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           pattern: Cache_rv_beta_*
           path: ./release
@@ -155,7 +155,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.2.2
       - name: Cache
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           name: Cache_anddea_stable
           path: ./release
@@ -199,7 +199,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.2.2
       - name: Cache
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           name: Cache_anddea_beta
           path: ./release
@@ -243,7 +243,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.2.2
       - name: Cache
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           name: Cache_rve
           path: ./release
@@ -287,7 +287,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.2.2
       - name: Cache
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           name: Cache_rve_beta
           path: ./release
@@ -325,7 +325,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.2.2
       - name: Cache
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           name: Cache_twitter_piko_stable
           path: ./release
@@ -363,7 +363,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.2.2
       - name: Cache
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           name: Cache_twitter_piko_beta
           path: ./release
@@ -401,7 +401,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.2.2
       - name: Cache
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           name: Cache_rv_experiments
           path: ./release
@@ -440,7 +440,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.2.2
       - name: Cache
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           name: Cache_scrazzz_patches
           path: ./release
@@ -479,7 +479,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.2.2
       - name: Cache
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           name: Cache_dropped_patches
           path: ./release
@@ -517,7 +517,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.2.2
       - name: Cache
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           name: Cache_biliroamingm
           path: ./release
@@ -555,7 +555,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.2.2
       - name: Cache
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           name: Cache_rve5
           path: ./release
@@ -593,7 +593,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.2.2
       - name: Cache
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           name: Cache_rve67
           path: ./release
