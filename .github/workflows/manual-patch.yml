@@ -11,23 +11,24 @@ on:
       org:
         description: 'Which "Revanced" do you want to patch?'
         required: true
-        default: 'Revanced'
+        default: "Revanced"
         type: choice
         options:
-          - 'Revanced'
-          - 'Revanced Beta'
-          - 'Revanced Extended'
-          - 'Revanced Extended Beta'
-          - 'RVE-anddea-stable'
-          - 'RVE-anddea-beta'
-          - 'Twitter Piko Stable'
-          - 'Twitter Piko Beta'
-          - 'Revanced Extended Android 6,7'
-          - 'Revanced Extended Android 5'
-          - 'BiliRoamingM'
-          - 'Scrazzz Patches'
-          - 'Dropped Patches - indrastorms'
-          - 'Revanced Experiments'
+          - "Revanced"
+          - "Revanced Beta"
+          - "Revanced Extended"
+          - "Revanced Extended Beta"
+          - "Revanced Extended Arsclib"
+          - "RVE-anddea-stable"
+          - "RVE-anddea-beta"
+          - "Twitter Piko Stable"
+          - "Twitter Piko Beta"
+          - "Revanced Extended Android 6,7"
+          - "Revanced Extended Android 5"
+          - "BiliRoamingM"
+          - "Scrazzz Patches"
+          - "Dropped Patches - indrastorms"
+          - "Revanced Experiments"
   workflow_call:
     inputs:
       org:
@@ -290,6 +291,44 @@ jobs:
         uses: actions/download-artifact@v6
         with:
           name: Cache_rve_beta
+          path: ./release
+      - name: Releasing APK files
+        uses: ./.github/actions/release
+
+  patch_rve_arsclib:
+    name: Patch Revanced Extended Arsclib
+    if: ${{ github.event.inputs.org == 'Revanced Extended Arsclib' || inputs.org == 'Revanced Extended Arsclib' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+      - name: Preparing to patch
+        uses: ./.github/actions/preparing
+      - name: Check github connection
+        id: check-gh-rve-arsclib
+        run: bash src/etc/connection.sh
+      - name: Patch apk
+        id: patch-rve-arsclib
+        if: steps.check-gh-rve-arsclib.outputs.internet_error == '0'
+        run: bash src/build/Revanced-Extended-Arsclib.sh
+      - name: Cache
+        if: steps.check-gh-piko-stable.outputs.internet_error == '0'
+        uses: actions/upload-artifact@v5
+        with:
+          name: Cache_rve_arsclib
+          path: ./release/*.apk
+
+  release_rve_arsclib:
+    name: Release revanced Extended Arsclib
+    needs: patch_rve_arsclib
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+      - name: Cache
+        uses: actions/download-artifact@v6
+        with:
+          name: Cache_rve_arsclib
           path: ./release
       - name: Releasing APK files
         uses: ./.github/actions/release
