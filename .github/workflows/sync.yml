@@ -1,0 +1,42 @@
+name: Sync Fork With Upstream
+
+on:
+  schedule:
+    - cron: "0 */6 * * *" # every 6 hours
+  workflow_dispatch: {}
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout my fork
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Add upstream remote
+        run: |
+          git remote add upstream https://github.com/FiorenMas/Revanced-And-Revanced-Extended-Non-Root.git
+          git fetch upstream
+
+      - name: Merge upstream into my main
+        run: |
+          git checkout main
+
+          # Fetch upstream changes
+          git fetch upstream
+
+          # Merge with conflict resolution preferring my fork
+          git merge upstream/main -X ours || true
+
+          # Commit automatically if needed
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Sync upstream"
+          fi
+
+      - name: Push updated main
+        run: |
+          git push origin main --force-with-lease
