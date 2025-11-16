@@ -2,41 +2,66 @@ name: Sync Fork With Upstream
 
 on:
   schedule:
-    - cron: "0 */6 * * *" # every 6 hours
-  workflow_dispatch: {}
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   sync:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout my fork
+      - name: Checkout fork using PAT
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          token: ${{ secrets.GH_TOKEN }}
+
+      - name: Set Git identity
+        run: |
+          git config user.name "Ludovico Piero"
+          git config user.email "lewdovico@gnuweeb.org"
 
       - name: Add upstream remote
         run: |
           git remote add upstream https://github.com/FiorenMas/Revanced-And-Revanced-Extended-Non-Root.git
           git fetch upstream
 
-      - name: Merge upstream into my main
+      - name: Create or update sync branch
         run: |
-          git checkout main
+          if git rev-parse --verify sync-upstream >/dev/null 2>&1; then
+            git checkout sync-upstream
+          else
+            git checkout -b sync-upstream
+          fi
 
-          # Fetch upstream changes
           git fetch upstream
-
-          # Merge with conflict resolution preferring my fork
           git merge upstream/main -X ours || true
 
-          # Commit automatically if needed
           if git diff --cached --quiet; then
-            echo "No changes to commit"
+            echo "No changes"
           else
             git commit -m "Sync upstream"
           fi
 
-      - name: Push updated main
+      - name: Push sync branch using PAT
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
-          git push origin main --force-with-lease
+          git push https://LudovicoPiero:${GH_TOKEN}@github.com/LudovicoPiero/revanced-apks.git sync-upstream
+
+      - name: Create or update PR
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          branch: sync-upstream
+          title: "Sync upstream → main"
+          body: |
+            Automated upstream sync.
+            Conflict resolution: `-X ours`
+          base: main
+          draft: false
+          labels: sync
+          delete-branch: true

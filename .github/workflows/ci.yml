@@ -237,7 +237,6 @@ jobs:
     needs:
       - Patch-Revanced
       - Patch-Revanced-Beta
-      - Patch-Spotjfy
       - Patch-RVE-anddea-stable
       - Patch-RVE-anddea-beta
       - Patch-Revanced-Extended
