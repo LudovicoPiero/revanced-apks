@@ -57,15 +57,14 @@ patch "youtube-music-stable-x86" "anddea" "inotia"
 # Patch Spotjfy Arm64-v8a
 get_patches_key "Spotjfy-anddea"
 j="i"
-version="9.0.44.478" #https://github.com/ReVanced/revanced-patches/issues/4958#issuecomment-2883387940
 get_apkpure "com.spot"$j"fy.music" "spotjfy-arm64-v8a" "spot"$j"fy-music-and-podcasts-for-android/com.spot"$j"fy.music"
 patch "spotjfy-arm64-v8a" "anddea"
 
-# # Patch YouTube Lite Arm64-v8a:
-# get_patches_key "youtube-rve-anddea"
-# split_editor "youtube-stable" "youtube-lite-arm64-v8a" "include" "split_config.arm64_v8a split_config.en split_config.xhdpi split_config.xxxhdpi"
-# patch "youtube-lite-arm64-v8a" "anddea" "inotia"
-# # Patch YouTube Lite Armeabi-v7a:
-# get_patches_key "youtube-rve-anddea"
-# split_editor "youtube-stable" "youtube-lite-armeabi-v7a" "include" "split_config.armeabi_v7a split_config.en split_config.xhdpi split_config.xxxhdpi"
-# patch "youtube-lite-armeabi-v7a" "anddea" "inotia"
+# Patch YouTube Lite Arm64-v8a:
+get_patches_key "youtube-rve-anddea"
+split_editor "youtube-stable" "youtube-lite-arm64-v8a" "include" "split_config.arm64_v8a split_config.en split_config.xhdpi split_config.xxxhdpi"
+patch "youtube-lite-arm64-v8a" "anddea" "inotia"
+# Patch YouTube Lite Armeabi-v7a:
+get_patches_key "youtube-rve-anddea"
+split_editor "youtube-stable" "youtube-lite-armeabi-v7a" "include" "split_config.armeabi_v7a split_config.en split_config.xhdpi split_config.xxxhdpi"
+patch "youtube-lite-armeabi-v7a" "anddea" "inotia"
