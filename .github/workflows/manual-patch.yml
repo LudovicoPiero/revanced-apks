@@ -56,7 +56,7 @@ jobs:
         run: bash src/build/Revanced.sh ${{ matrix.run }}
       - name: Cache
         if: steps.check-gh-rv.outputs.internet_error == '0'
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: Cache_rv_${{ matrix.run }}
           path: ./release/*.apk
@@ -98,7 +98,7 @@ jobs:
         run: bash src/build/Revanced-Beta.sh ${{ matrix.run }}
       - name: Cache
         if: steps.check-gh-rvb.outputs.internet_error == '0'
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: Cache_rv_beta_${{ matrix.run }}
           path: ./release/*.apk
@@ -143,7 +143,7 @@ jobs:
         if: steps.check-gh-rve-anddea-stable.outputs.internet_error == '0'
         run: bash src/build/Anddea-Revanced-Extended.sh
       - name: Cache
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: Cache_anddea_stable
           path: ./release/*.apk
@@ -187,7 +187,7 @@ jobs:
         if: steps.check-gh-rve-anddea-beta.outputs.internet_error == '0'
         run: bash src/build/Anddea-Revanced-Extended-Beta.sh
       - name: Cache
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: Cache_anddea_beta
           path: ./release/*.apk
@@ -231,7 +231,7 @@ jobs:
         if: steps.check-gh-rve.outputs.internet_error == '0'
         run: bash src/build/Revanced-Extended.sh
       - name: Cache
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: Cache_rve
           path: ./release/*.apk
@@ -275,7 +275,7 @@ jobs:
         if: steps.check-gh-rve-beta.outputs.internet_error == '0'
         run: bash src/build/Revanced-Extended-Beta.sh
       - name: Cache
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: Cache_rve_beta
           path: ./release/*.apk
@@ -313,7 +313,7 @@ jobs:
         run: bash src/build/Revanced-Extended-Arsclib.sh
       - name: Cache
         if: steps.check-gh-piko-stable.outputs.internet_error == '0'
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: Cache_rve_arsclib
           path: ./release/*.apk
@@ -351,7 +351,7 @@ jobs:
         run: bash src/build/Piko.sh
       - name: Cache
         if: steps.check-gh-piko-stable.outputs.internet_error == '0'
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: Cache_twitter_piko_stable
           path: ./release/*.apk
@@ -389,7 +389,7 @@ jobs:
         run: bash src/build/Piko-Beta.sh
       - name: Cache
         if: steps.check-gh-piko-beta.outputs.internet_error == '0'
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: Cache_twitter_piko_beta
           path: ./release/*.apk
@@ -427,7 +427,7 @@ jobs:
         run: bash src/build/Revanced-Experiment.sh
       - name: Cache
         if: steps.check-gh-rv-experiments.outputs.internet_error == '0'
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: Cache_rv_experiments
           path: ./release/*.apk
@@ -465,7 +465,7 @@ jobs:
         run: bash src/build/scrazzz-revanced.sh
       - name: Cache
         if: steps.check-gh-scrazzz-patches.outputs.internet_error == '0'
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: Cache_scrazzz_patches
           path: ./release/*.apk
@@ -505,7 +505,7 @@ jobs:
         run: bash src/build/Dropped-Patches-Revanced.sh
       - name: Cache
         if: steps.check-gh-Dropped-Patches-indrastorms.outputs.internet_error == '0'
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: Cache_dropped_patches
           path: ./release/*.apk
@@ -543,7 +543,7 @@ jobs:
         run: bash src/build/BiliRoamingM.sh
       - name: Cache
         if: steps.check-gh-BiliRoamingM.outputs.internet_error == '0'
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: Cache_biliroamingm
           path: ./release/*.apk
@@ -581,7 +581,7 @@ jobs:
         run: bash src/build/Revanced-Extended-Android-5.sh
       - name: Cache
         if: steps.check-gh-rve5.outputs.internet_error == '0'
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: Cache_rve5
           path: ./release/*.apk
@@ -619,7 +619,7 @@ jobs:
         run: bash src/build/Revanced-Extended-Android-6-7.sh
       - name: Cache
         if: steps.check-gh-rve67.outputs.internet_error == '0'
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: Cache_rve67
           path: ./release/*.apk
