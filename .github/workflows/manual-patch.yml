@@ -1,4 +1,4 @@
-name: Manual Patch
+name: 1. Manual Patch
 permissions: write-all
 env:
   repository: ${{ github.repository }}
@@ -11,24 +11,25 @@ on:
       org:
         description: 'Which "Revanced" do you want to patch?'
         required: true
-        default: "Revanced"
+        default: 'Revanced'
         type: choice
         options:
-          - "Revanced"
-          - "Revanced Beta"
-          - "Revanced Extended"
-          - "Revanced Extended Beta"
-          - "Revanced Extended Arsclib"
-          - "RVE-anddea-stable"
-          - "RVE-anddea-beta"
-          - "Twitter Piko Stable"
-          - "Twitter Piko Beta"
-          - "Revanced Extended Android 6,7"
-          - "Revanced Extended Android 5"
-          - "BiliRoamingM"
-          - "Scrazzz Patches"
-          - "Dropped Patches - indrastorms"
-          - "Revanced Experiments"
+          - 'Revanced'
+          - 'Revanced Beta'
+          - 'Revanced Extended'
+          - 'Revanced Extended Beta'
+          - 'Revanced Extended Arsclib'
+          - 'Revanced LisoUseInAIKyrios'
+          - 'RVE-anddea-stable'
+          - 'RVE-anddea-beta'
+          - 'Twitter Piko Stable'
+          - 'Twitter Piko Beta'
+          - 'Revanced Extended Android 6,7'
+          - 'Revanced Extended Android 5'
+          - 'BiliRoamingM'
+          - 'Scrazzz Patches'
+          - 'Dropped Patches - indrastorms'
+          - 'Revanced Experiments'
   workflow_call:
     inputs:
       org:
@@ -40,11 +41,12 @@ jobs:
     if: ${{ github.event.inputs.org == 'Revanced' || inputs.org == 'Revanced' }}
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
-        run: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+        run: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
     steps:
       - name: Checkout
-        uses: actions/checkout@v6.0.1
+        uses: actions/checkout@v4.2.2
       - name: Preparing to patch
         uses: ./.github/actions/preparing
       - name: Check github connection
@@ -54,39 +56,21 @@ jobs:
         id: patch-rv
         if: steps.check-gh-rv.outputs.internet_error == '0'
         run: bash src/build/Revanced.sh ${{ matrix.run }}
-      - name: Cache
-        if: steps.check-gh-rv.outputs.internet_error == '0'
-        uses: actions/upload-artifact@v6
-        with:
-          name: Cache_rv_${{ matrix.run }}
-          path: ./release/*.apk
-
-  release_rv:
-    name: Release Revanced Stable
-    needs: patch_rv
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6.0.1
-      - name: Cache
-        uses: actions/download-artifact@v7
-        with:
-          pattern: Cache_rv_*
-          path: ./release
-          merge-multiple: true
       - name: Releasing APK files
+        id: release-rv
+        if: steps.check-gh-rv.outputs.internet_error == '0'
         uses: ./.github/actions/release
-
   patch_rv_beta:
     name: Patch Revanced Beta
     if: ${{ github.event.inputs.org == 'Revanced Beta' || inputs.org == 'Revanced Beta' }}
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
-        run: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+        run: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
     steps:
       - name: Checkout
-        uses: actions/checkout@v6.0.1
+        uses: actions/checkout@v4.2.2
       - name: Preparing to patch
         uses: ./.github/actions/preparing
       - name: Check github connection
@@ -96,29 +80,33 @@ jobs:
         id: patch-rvb
         if: steps.check-gh-rvb.outputs.internet_error == '0'
         run: bash src/build/Revanced-Beta.sh ${{ matrix.run }}
-      - name: Cache
+      - name: Releasing APK files
+        id: release-rvb
         if: steps.check-gh-rvb.outputs.internet_error == '0'
-        uses: actions/upload-artifact@v6
-        with:
-          name: Cache_rv_beta_${{ matrix.run }}
-          path: ./release/*.apk
-
-  release_rv_beta:
-    name: Release Revanced Beta
-    needs: patch_rv_beta
+        uses: ./.github/actions/release
+  patch_rv_liso:
+    name: Patch Revanced LisoUseInAIKyrios
+    if: ${{ github.event.inputs.org == 'Revanced LisoUseInAIKyrios' || inputs.org == 'Revanced LisoUseInAIKyrios' }}
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        run: [1, 2, 3]
     steps:
       - name: Checkout
-        uses: actions/checkout@v6.0.1
-      - name: Cache
-        uses: actions/download-artifact@v7
-        with:
-          pattern: Cache_rv_beta_*
-          path: ./release
-          merge-multiple: true
+        uses: actions/checkout@v4.2.2
+      - name: Preparing to patch
+        uses: ./.github/actions/preparing
+      - name: Check github connection
+        id: check-gh-rv-liso
+        run: bash src/etc/connection.sh
+      - name: Patch apk
+        id: patch-rv-liso
+        if: steps.check-gh-rv-liso.outputs.internet_error == '0'
+        run: bash src/build/LisoUseInAIKyrios.sh ${{ matrix.run }}
       - name: Releasing APK files
+        id: release-rv-liso
+        if: steps.check-gh-rv-liso.outputs.internet_error == '0'
         uses: ./.github/actions/release
-
   patch_rve_anddea_stable:
     name: Patch RVX Anddea Stable
     if: ${{ github.event.inputs.org == 'RVE-anddea-stable' || inputs.org == 'RVE-anddea-stable' }}
@@ -128,7 +116,7 @@ jobs:
       options: --user root
     steps:
       - name: Checkout
-        uses: actions/checkout@v6.0.1
+        uses: actions/checkout@v4.2.2
       - name: Preparing to patch
         uses: ./.github/actions/preparing
       - name: Install library
@@ -143,26 +131,25 @@ jobs:
         if: steps.check-gh-rve-anddea-stable.outputs.internet_error == '0'
         run: bash src/build/Anddea-Revanced-Extended.sh
       - name: Cache
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v4
         with:
           name: Cache_anddea_stable
-          path: ./release/*.apk
-
+          path: |
+            ./release/*.apk
   release_rve_anddea_stable:
     name: Release RVX Anddea Stable
     needs: patch_rve_anddea_stable
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6.0.1
+        uses: actions/checkout@v2
       - name: Cache
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v4
         with:
           name: Cache_anddea_stable
           path: ./release
       - name: Releasing APK files
         uses: ./.github/actions/release
-
   patch_rve_anddea_beta:
     name: Patch RVX Anddea Beta version
     if: ${{ github.event.inputs.org == 'RVE-anddea-beta' || inputs.org == 'RVE-anddea-beta' }}
@@ -172,7 +159,7 @@ jobs:
       options: --user root
     steps:
       - name: Checkout
-        uses: actions/checkout@v6.0.1
+        uses: actions/checkout@v4.2.2
       - name: Preparing to patch
         uses: ./.github/actions/preparing
       - name: Install library
@@ -187,26 +174,25 @@ jobs:
         if: steps.check-gh-rve-anddea-beta.outputs.internet_error == '0'
         run: bash src/build/Anddea-Revanced-Extended-Beta.sh
       - name: Cache
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v4
         with:
           name: Cache_anddea_beta
-          path: ./release/*.apk
-
+          path: |
+            ./release/*.apk
   release_rve_anddea_beta:
     name: Release RVX Anddea Beta
     needs: patch_rve_anddea_beta
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6.0.1
+        uses: actions/checkout@v2
       - name: Cache
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v4
         with:
           name: Cache_anddea_beta
           path: ./release
       - name: Releasing APK files
         uses: ./.github/actions/release
-
   patch_rve:
     name: Patch Revanced Extended Stable
     if: ${{ github.event.inputs.org == 'Revanced Extended' || inputs.org == 'Revanced Extended' }}
@@ -216,7 +202,7 @@ jobs:
       options: --user root
     steps:
       - name: Checkout
-        uses: actions/checkout@v6.0.1
+        uses: actions/checkout@v2
       - name: Preparing to patch
         uses: ./.github/actions/preparing
       - name: Install library
@@ -231,26 +217,25 @@ jobs:
         if: steps.check-gh-rve.outputs.internet_error == '0'
         run: bash src/build/Revanced-Extended.sh
       - name: Cache
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v4
         with:
           name: Cache_rve
-          path: ./release/*.apk
-
+          path: |
+            ./release/*.apk
   release_rve:
     name: Release Revanced Extended Stable
     needs: patch_rve
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6.0.1
+        uses: actions/checkout@v2
       - name: Cache
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v4
         with:
           name: Cache_rve
           path: ./release
       - name: Releasing APK files
         uses: ./.github/actions/release
-
   patch_rve_beta:
     name: Patch Revanced Extended Beta
     if: ${{ github.event.inputs.org == 'Revanced Extended Beta' || inputs.org == 'Revanced Extended Beta' }}
@@ -260,7 +245,7 @@ jobs:
       options: --user root
     steps:
       - name: Checkout
-        uses: actions/checkout@v6.0.1
+        uses: actions/checkout@v4.2.2
       - name: Preparing to patch
         uses: ./.github/actions/preparing
       - name: Install library
@@ -275,33 +260,32 @@ jobs:
         if: steps.check-gh-rve-beta.outputs.internet_error == '0'
         run: bash src/build/Revanced-Extended-Beta.sh
       - name: Cache
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v4
         with:
           name: Cache_rve_beta
-          path: ./release/*.apk
-
+          path: |
+            ./release/*.apk
   release_rve_beta:
     name: Release Revanced Extended Beta
     needs: patch_rve_beta
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6.0.1
+        uses: actions/checkout@v2
       - name: Cache
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v4
         with:
           name: Cache_rve_beta
           path: ./release
       - name: Releasing APK files
         uses: ./.github/actions/release
-
   patch_rve_arsclib:
     name: Patch Revanced Extended Arsclib
     if: ${{ github.event.inputs.org == 'Revanced Extended Arsclib' || inputs.org == 'Revanced Extended Arsclib' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6.0.1
+        uses: actions/checkout@v4.2.2
       - name: Preparing to patch
         uses: ./.github/actions/preparing
       - name: Check github connection
@@ -311,35 +295,17 @@ jobs:
         id: patch-rve-arsclib
         if: steps.check-gh-rve-arsclib.outputs.internet_error == '0'
         run: bash src/build/Revanced-Extended-Arsclib.sh
-      - name: Cache
-        if: steps.check-gh-piko-stable.outputs.internet_error == '0'
-        uses: actions/upload-artifact@v6
-        with:
-          name: Cache_rve_arsclib
-          path: ./release/*.apk
-
-  release_rve_arsclib:
-    name: Release revanced Extended Arsclib
-    needs: patch_rve_arsclib
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6.0.1
-      - name: Cache
-        uses: actions/download-artifact@v7
-        with:
-          name: Cache_rve_arsclib
-          path: ./release
       - name: Releasing APK files
+        id: release-rve-arsclib
+        if: steps.check-gh-rve-arsclib.outputs.internet_error == '0'
         uses: ./.github/actions/release
-
   patch_twitter_piko_stable:
     name: Patch Twitter Piko Stable
     if: ${{ github.event.inputs.org == 'Twitter Piko Stable' || inputs.org == 'Twitter Piko Stable' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6.0.1
+        uses: actions/checkout@v4.2.2
       - name: Preparing to patch
         uses: ./.github/actions/preparing
       - name: Check github connection
@@ -349,35 +315,17 @@ jobs:
         id: patch-piko-stable
         if: steps.check-gh-piko-stable.outputs.internet_error == '0'
         run: bash src/build/Piko.sh
-      - name: Cache
-        if: steps.check-gh-piko-stable.outputs.internet_error == '0'
-        uses: actions/upload-artifact@v6
-        with:
-          name: Cache_twitter_piko_stable
-          path: ./release/*.apk
-
-  release_twitter_piko_stable:
-    name: Release Twitter Piko Stable
-    needs: patch_twitter_piko_stable
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6.0.1
-      - name: Cache
-        uses: actions/download-artifact@v7
-        with:
-          name: Cache_twitter_piko_stable
-          path: ./release
       - name: Releasing APK files
+        id: release-piko-stable
+        if: steps.check-gh-piko-stable.outputs.internet_error == '0'
         uses: ./.github/actions/release
-
   patch_twitter_piko_beta:
     name: Patch Twitter Piko Beta
     if: ${{ github.event.inputs.org == 'Twitter Piko Beta' || inputs.org == 'Twitter Piko Beta' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6.0.1
+        uses: actions/checkout@v4.2.2
       - name: Preparing to patch
         uses: ./.github/actions/preparing
       - name: Check github connection
@@ -387,227 +335,17 @@ jobs:
         id: patch-piko-beta
         if: steps.check-gh-piko-beta.outputs.internet_error == '0'
         run: bash src/build/Piko-Beta.sh
-      - name: Cache
+      - name: Releasing APK files
+        id: release-piko-beta
         if: steps.check-gh-piko-beta.outputs.internet_error == '0'
-        uses: actions/upload-artifact@v6
-        with:
-          name: Cache_twitter_piko_beta
-          path: ./release/*.apk
-
-  release_twitter_piko_beta:
-    name: Release Twitter Piko Beta
-    needs: patch_twitter_piko_beta
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6.0.1
-      - name: Cache
-        uses: actions/download-artifact@v7
-        with:
-          name: Cache_twitter_piko_beta
-          path: ./release
-      - name: Releasing APK files
         uses: ./.github/actions/release
-
-  patch_rv_experiments:
-    name: Patch Revanced Experiments
-    if: ${{ github.event.inputs.org == 'Revanced Experiments' || inputs.org == 'Revanced Experiments' }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6.0.1
-      - name: Preparing to patch
-        uses: ./.github/actions/preparing
-      - name: Check github connection
-        id: check-gh-rv-experiments
-        run: bash src/etc/connection.sh
-      - name: Patch apk
-        id: patch-rv-experiments
-        if: steps.check-gh-rv-experiments.outputs.internet_error == '0'
-        run: bash src/build/Revanced-Experiment.sh
-      - name: Cache
-        if: steps.check-gh-rv-experiments.outputs.internet_error == '0'
-        uses: actions/upload-artifact@v6
-        with:
-          name: Cache_rv_experiments
-          path: ./release/*.apk
-
-  release_rv_experiments:
-    name: Release Revanced Experiments
-    needs: patch_rv_experiments
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6.0.1
-      - name: Cache
-        uses: actions/download-artifact@v7
-        with:
-          name: Cache_rv_experiments
-          path: ./release
-      - name: Releasing APK files
-        uses: ./.github/actions/release
-
-  patch_scrazzz_patches:
-    name: Patch Scrazzz Patches Revanced
-    if: ${{ github.event.inputs.org == 'Scrazzz Patches' || inputs.org == 'Scrazzz Patches' }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6.0.1
-      - name: Preparing to patch
-        uses: ./.github/actions/preparing
-      - name: Check github connection
-        id: check-gh-scrazzz-patches
-        run: bash src/etc/connection.sh
-      - name: Patch apk
-        id: patch-scrazzz-patches
-        if: steps.check-gh-scrazzz-patches.outputs.internet_error == '0'
-        run: bash src/build/scrazzz-revanced.sh
-      - name: Cache
-        if: steps.check-gh-scrazzz-patches.outputs.internet_error == '0'
-        uses: actions/upload-artifact@v6
-        with:
-          name: Cache_scrazzz_patches
-          path: ./release/*.apk
-
-  release_scrazzz_patches:
-    name: Release Scrazzz Patches Revanced
-    needs: patch_scrazzz_patches
-    if: needs.patch_scrazzz_patches.result == 'success'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6.0.1
-      - name: Cache
-        uses: actions/download-artifact@v7
-        with:
-          name: Cache_scrazzz_patches
-          path: ./release
-          if-no-artifact-found: ignore
-      - name: Releasing APK files
-        uses: ./.github/actions/release
-
-  patch_Dropped_Patches:
-    name: Dropped Patches Revanced - indrastorms
-    if: ${{ github.event.inputs.org == 'Dropped Patches - indrastorms' || inputs.org == 'Dropped Patches - indrastorms' }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6.0.1
-      - name: Preparing to patch
-        uses: ./.github/actions/preparing
-      - name: Check github connection
-        id: check-gh-Dropped-Patches-indrastorms
-        run: bash src/etc/connection.sh
-      - name: Patch apk
-        id: patch-Dropped-Patches-indrastorms
-        if: steps.check-gh-Dropped-Patches-indrastorms.outputs.internet_error == '0'
-        run: bash src/build/Dropped-Patches-Revanced.sh
-      - name: Cache
-        if: steps.check-gh-Dropped-Patches-indrastorms.outputs.internet_error == '0'
-        uses: actions/upload-artifact@v6
-        with:
-          name: Cache_dropped_patches
-          path: ./release/*.apk
-
-  release_Dropped_Patches:
-    name: Release Dropped Patches Revanced - indrastorms
-    needs: patch_Dropped_Patches
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6.0.1
-      - name: Cache
-        uses: actions/download-artifact@v7
-        with:
-          name: Cache_dropped_patches
-          path: ./release
-      - name: Releasing APK files
-        uses: ./.github/actions/release
-
-  patch_BiliRoamingM:
-    name: Patch BiliRoamingM
-    if: ${{ github.event.inputs.org == 'BiliRoamingM' || inputs.org == 'BiliRoamingM' }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6.0.1
-      - name: Preparing to patch
-        uses: ./.github/actions/preparing
-      - name: Check github connection
-        id: check-gh-BiliRoamingM
-        run: bash src/etc/connection.sh
-      - name: Patch apk
-        id: patch-BiliRoamingM
-        if: steps.check-gh-BiliRoamingM.outputs.internet_error == '0'
-        run: bash src/build/BiliRoamingM.sh
-      - name: Cache
-        if: steps.check-gh-BiliRoamingM.outputs.internet_error == '0'
-        uses: actions/upload-artifact@v6
-        with:
-          name: Cache_biliroamingm
-          path: ./release/*.apk
-
-  release_BiliRoamingM:
-    name: Release BiliRoamingM
-    needs: patch_BiliRoamingM
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6.0.1
-      - name: Cache
-        uses: actions/download-artifact@v7
-        with:
-          name: Cache_biliroamingm
-          path: ./release
-      - name: Releasing APK files
-        uses: ./.github/actions/release
-
-  patch_rve5:
-    name: Patch RVX Android 5
-    if: ${{ github.event.inputs.org == 'Revanced Extended Android 5' || inputs.org == 'Revanced Extended Android 5' }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6.0.1
-      - name: Preparing to patch
-        uses: ./.github/actions/preparing
-      - name: Check github connection
-        id: check-gh-rve5
-        run: bash src/etc/connection.sh
-      - name: Patch apk
-        id: patch-rve5
-        if: steps.check-gh-rve5.outputs.internet_error == '0'
-        run: bash src/build/Revanced-Extended-Android-5.sh
-      - name: Cache
-        if: steps.check-gh-rve5.outputs.internet_error == '0'
-        uses: actions/upload-artifact@v6
-        with:
-          name: Cache_rve5
-          path: ./release/*.apk
-
-  release_rve5:
-    name: Release RVX Android 5
-    needs: patch_rve5
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6.0.1
-      - name: Cache
-        uses: actions/download-artifact@v7
-        with:
-          name: Cache_rve5
-          path: ./release
-      - name: Releasing APK files
-        uses: ./.github/actions/release
-
   patch_rve67:
     name: Patch RVX Android 6,7
     if: ${{ github.event.inputs.org == 'Revanced Extended Android 6,7' || inputs.org == 'Revanced Extended Android 6,7' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6.0.1
+        uses: actions/checkout@v4.2.2
       - name: Preparing to patch
         uses: ./.github/actions/preparing
       - name: Check github connection
@@ -617,24 +355,107 @@ jobs:
         id: patch-rve67
         if: steps.check-gh-rve67.outputs.internet_error == '0'
         run: bash src/build/Revanced-Extended-Android-6-7.sh
-      - name: Cache
+      - name: Releasing APK files
+        id: release-rve67
         if: steps.check-gh-rve67.outputs.internet_error == '0'
-        uses: actions/upload-artifact@v6
-        with:
-          name: Cache_rve67
-          path: ./release/*.apk
-
-  release_rve67:
-    name: Release RVX Android 6,7
-    needs: patch_rve67
+        uses: ./.github/actions/release
+  patch_rve5:
+    name: Patch RVX Android 5
+    if: ${{ github.event.inputs.org == 'Revanced Extended Android 5' || inputs.org == 'Revanced Extended Android 5' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6.0.1
-      - name: Cache
-        uses: actions/download-artifact@v7
-        with:
-          name: Cache_rve67
-          path: ./release
+        uses: actions/checkout@v4.2.2
+      - name: Preparing to patch
+        uses: ./.github/actions/preparing
+      - name: Check github connection
+        id: check-gh-rve5
+        run: bash src/etc/connection.sh
+      - name: Patch apk
+        id: patch-rve5
+        if: steps.check-gh-rve5.outputs.internet_error == '0'
+        run: bash src/build/Revanced-Extended-Android-5.sh
       - name: Releasing APK files
+        id: release-rve5
+        if: steps.check-gh-rve5.outputs.internet_error == '0'
+        uses: ./.github/actions/release
+  patch_BiliRoamingM:
+    name: Patch BiliRoamingM
+    if: ${{ github.event.inputs.org == 'BiliRoamingM' || inputs.org == 'BiliRoamingM' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.1
+      - name: Preparing to patch
+        uses: ./.github/actions/preparing
+      - name: Check github connection
+        id: check-gh-BiliRoamingM
+        run: bash src/etc/connection.sh
+      - name: Patch apk
+        id: patch-BiliRoamingM
+        if: steps.check-gh-BiliRoamingM.outputs.internet_error == '0'
+        run: bash src/build/BiliRoamingM.sh
+      - name: Releasing APK files
+        id: release-BiliRoamingM
+        if: steps.check-gh-BiliRoamingM.outputs.internet_error == '0'
+        uses: ./.github/actions/release
+  patch_scrazzz_Patches:
+    name: Scrazzz Patches Revanced
+    if: ${{ github.event.inputs.org == 'Scrazzz Patches' || inputs.org == 'Scrazzz Patches' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+      - name: Preparing to patch
+        uses: ./.github/actions/preparing
+      - name: Check github connection
+        id: check-gh-scrazzz-patches
+        run: bash src/etc/connection.sh
+      - name: Patch apk
+        id: patch-scrazzz-patches
+        if: steps.check-gh-scrazzz-patches.outputs.internet_error == '0'
+        run: bash src/build/scrazzz-revanced.sh
+      - name: Releasing APK files
+        id: release-scrazzz-patches
+        if: steps.check-gh-scrazzz-patches.outputs.internet_error == '0'
+        uses: ./.github/actions/release
+  patch_Dropped_Patches:
+    name: Dropped Patches Revanced - indrastorms
+    if: ${{ github.event.inputs.org == 'Dropped Patches - indrastorms' || inputs.org == 'Dropped Patches - indrastorms' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+      - name: Preparing to patch
+        uses: ./.github/actions/preparing
+      - name: Check github connection
+        id: check-gh-Dropped-Patches-indrastorms
+        run: bash src/etc/connection.sh
+      - name: Patch apk
+        id: patch-Dropped-Patches-indrastorms
+        if: steps.check-gh-Dropped-Patches-indrastorms.outputs.internet_error == '0'
+        run: bash src/build/Dropped-Patches-Revanced.sh
+      - name: Releasing APK files
+        id: release-Dropped-Patches-indrastorms
+        if: steps.check-gh-Dropped-Patches-indrastorms.outputs.internet_error == '0'
+        uses: ./.github/actions/release
+  patch_rv_experiments:
+    name: Patch Revanced Experiments
+    if: ${{ github.event.inputs.org == 'Revanced Experiments' || inputs.org == 'Revanced Experiments' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+      - name: Preparing to patch
+        uses: ./.github/actions/preparing
+      - name: Check github connection
+        id: check-gh-rv-experiments
+        run: bash src/etc/connection.sh
+      - name: Patch apk
+        id: patch-rv-experiments
+        if: steps.check-gh-rv-experiments.outputs.internet_error == '0'
+        run: bash src/build/Revanced-Experiment.sh
+      - name: Releasing APK files
+        id: release-rv-experiments
+        if: steps.check-gh-rv-experiments.outputs.internet_error == '0'
         uses: ./.github/actions/release
