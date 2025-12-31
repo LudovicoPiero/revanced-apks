@@ -144,7 +144,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Cache
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: Cache_anddea_stable
           path: ./release
@@ -187,7 +187,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Cache
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: Cache_anddea_beta
           path: ./release
@@ -230,7 +230,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Cache
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: Cache_rve
           path: ./release
@@ -273,7 +273,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Cache
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: Cache_rve_beta
           path: ./release
